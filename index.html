@@ -33,7 +33,6 @@
 
       var ns = 'urn:x-cast:com.google.cast.sample.helloworld';
       context.addCustomMessageListener(ns, function(e) {
-        var msg = JSON.parse(e.data);
         if (e && e.name === "addVideo") {
           YoutubeContainer.instance.add(e.videoId);
         }
