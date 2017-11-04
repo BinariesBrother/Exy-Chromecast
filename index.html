@@ -72,9 +72,10 @@
     function onPlayerStateChange(event) {
       console.log(event.data);
       if (event.data == YT.PlayerState.PLAYING) {
-        document.getElementById("player").style.visible = 'block';
+        document.getElementById("player").style.display = 'block';
       } else if (event.data == YT.PlayerState.ENDED) {
         document.getElementById("player").style.display = 'none';
+        console.log("pause ", document.getElementById("player").style)
       } else if (event.data == YT.PlayerState.PAUSED) {
         document.webkitExitFullscreen();
 
