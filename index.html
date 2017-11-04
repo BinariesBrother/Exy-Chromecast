@@ -22,9 +22,6 @@
     </script>
     <script>
       const context = cast.framework.CastReceiverContext.getInstance();
-      context.start({
-        maxInactivity: 12000
-      });
 
       var ns = 'urn:x-cast:com.google.cast.sample.helloworld';
       window.messageBus = window.castReceiverManager.getCastMessageBus(ns);
