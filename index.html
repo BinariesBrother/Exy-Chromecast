@@ -25,6 +25,16 @@
       context.start({
         maxInactivity: 12000
       });
+
+      messageBus = context.getCastMessageBus(
+        'urn:x-cast:com.google.cast.media',
+        cast.receiver.CastMessageBus.MessageType.JSON
+      );
+
+      messageBus.onMessage = function(event) {
+        console.log(event);
+      };
+
       context.addCustomMessageListener("addVideoId", function(e) {
         console.log("add video", e)
       });
