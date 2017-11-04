@@ -19,7 +19,9 @@
   </script>
   <script>
     const context = cast.framework.CastReceiverContext.getInstance();
-    context.start();
+    context.start({
+      maxInactivity: 12000
+    });
   </script>
 </body>
 
