@@ -19,15 +19,24 @@
     </div>
 
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js" />
+    <script type="text/javascript" src="lib/youtube/YoutubeContainer.js" />
+    <script type="text/javascript" src="PlayerWrapper.js" />
     </script>
     <script>
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
       const context = cast.framework.CastReceiverContext.getInstance();
 
       var ns = 'urn:x-cast:com.google.cast.sample.helloworld';
       context.addCustomMessageListener(ns, function(e) {
         var msg = JSON.parse(e.data);
-        console.log(msg);
-        //window.messageBus.send(e.senderId, 'ok');
+        if (e && e.name === "addVideo") {
+          YoutubeContainer.instance.add(e.videoId);
+        }
       });
 
       // 2. This code loads the IFrame Player API code asynchronously.
