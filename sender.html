@@ -1,0 +1,66 @@
+<html>
+
+  <head>
+    <script src="chrome-extension://pkedcjkdefgpdelpbcmbmeomcjbeemfm/cast_sender.js"></script>
+  </head>
+
+  <body>
+    <div class="content"></div>
+
+    <button is="google-cast-button"> cast</button>
+    <button on-click="sendMessage()">send</button>
+
+    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+    <script>
+      var session;
+      var sessionRequest;
+      var apiConfig;
+
+      window['__onGCastApiAvailable'] = function(loaded, errorInfo) {
+        if (loaded) {
+          initializeCastApi();
+        } else {
+          console.log(errorInfo);
+        }
+      }
+
+      function sendMessage() {
+
+        session.sendMessage(
+          'urn:x-cast:com.google.cast.sample.helloworld', {
+            name: "addVideo",
+            videoId: "M7lc1UVf-VE"
+          },
+          function(m) {
+            console.log('Message sent: ', 5);
+          },
+          function(e) {
+            console.log("err", e)
+          }
+        );
+      }
+
+      function initializeCastApi() {
+        sessionRequest = new chrome.cast.SessionRequest("2505F771");
+        apiConfig = new chrome.cast.ApiConfig(sessionRequest,
+          sessionListener,
+          receiverListener);
+        chrome.cast.initialize(apiConfig, (e => console.log("init sucess")), (e => console.log("init error")));
+      }
+
+      function sessionListener(e) {
+        session = e;
+        console.log("session ", e);
+      }
+
+      function receiverListener(e) {
+        if (e === chrome.cast.ReceiverAvailability.AVAILABLE) {
+          console.log("init done");
+        }
+      }
+    </script>
+
+
+  </body>
+
+</html>
