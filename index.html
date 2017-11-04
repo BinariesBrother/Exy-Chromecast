@@ -1,1 +1,17 @@
-<html></html>
+<html>
+    <head>
+    </head>
+    <body>
+      <style>
+        .content{
+          background-color: red;      
+        }
+      </style>
+      <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"/>
+      </script>
+      <script>
+        const context = cast.framework.CastReceiverContext.getInstance();
+        context.start();
+      </script>
+    </body>
+    </html>
