@@ -22,7 +22,7 @@
 
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js">
     </script>
-    <script type="text/javascript" src="YoutubeContainer.js">
+    <script type="text/javascript" src="lib/youtube/YoutubeContainer.js">
     </script>
     <script type="text/javascript" src="PlayerWrapper.js">
     </script>
@@ -41,15 +41,6 @@
           YoutubeContainer.instance.add(e.data.videoId);
         }
       });
-
-      // 2. This code loads the IFrame Player API code asynchronously.
-      var tag = document.createElement('script');
-
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      var player;
 
       function onYouTubeIframeAPIReady() {
         //TODO send message to senders
