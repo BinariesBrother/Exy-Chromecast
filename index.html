@@ -24,7 +24,9 @@
     </script>
     <script type="text/javascript" src="lib/youtube/YoutubeContainer.js">
     </script>
-    <script type="text/javascript" src="PlayerWrapper.js">
+    <script type="text/javascript" src="lib/youtube/PlayerWrapper.js">
+    </script>
+    <script type="text/javascript" src="lib/chromecast/ChromeCastApi.js">
     </script>
     <script>
       var tag = document.createElement('script');
@@ -35,7 +37,7 @@
 
       const context = cast.framework.CastReceiverContext.getInstance();
 
-      var ns = 'urn:x-cast:com.google.cast.sample.helloworld';
+      var ns = 'urn:x-cast:com.exy.player';
       context.addCustomMessageListener(ns, function(e) {
         if (e && e.data && e.data.name === "addVideo") {
           YoutubeContainer.instance.add(e.data.videoId);
