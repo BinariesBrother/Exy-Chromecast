@@ -6,9 +6,8 @@
 
   <body>
     <div class="content"></div>
-
-    <button is="google-cast-button"> cast</button>
-    <button on-click="sendMessage()">send</button>
+    <input id="videoId" value="M7lc1UVf-VE">
+    <button onclick="sendMessage()">send</button>
 
     <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
     <script>
@@ -16,20 +15,34 @@
       var sessionRequest;
       var apiConfig;
 
-      window['__onGCastApiAvailable'] = function(loaded, errorInfo) {
-        if (loaded) {
-          initializeCastApi();
-        } else {
-          console.log(errorInfo);
+      class B {
+        static plop(a) {
+          return "plop" + a;
         }
       }
 
-      function sendMessage() {
+      class A {
+        static get B() {
+          return B;
+        }
+      }
 
+      window['__onGCastApiAvailable'] = function(loaded, errorInfo) {
+          if (loaded) {
+            initializeCastApi();
+          } else {
+            console.log(errorInfo);
+          }
+        }
+        //M7lc1UVf-VE
+      function sendMessage() {
+        if (!document.getElementById("videoId").value) {
+          console.log("nothing to send!");
+          return false;
+        }
         session.sendMessage(
           'urn:x-cast:com.exy.player', {
-            name: "addVideo",
-            videoId: "M7lc1UVf-VE"
+            exec: "YoutubeContainer.instance.add('" + document.getElementById("videoId").value + "')"
           },
           function(m) {
             console.log('Message sent: ', 5);

@@ -34,15 +34,7 @@
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      const context = cast.framework.CastReceiverContext.getInstance();
-
-      var ns = 'urn:x-cast:com.exy.player';
-      context.addCustomMessageListener(ns, function(e) {
-        if (e && e.data && e.data.name === "addVideo") {
-          YoutubeContainer.instance.add(e.data.videoId);
-        }
-      });
+      ChromeCastApi.instance;
 
       function onYouTubeIframeAPIReady() {
         //TODO send message to senders
