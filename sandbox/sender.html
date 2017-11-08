@@ -72,6 +72,11 @@
       function sessionListener(e) {
         session = e;
         console.log("session ", e);
+        session.addMessageListener('urn:x-cast:com.exy.player', messageListener);
+      }
+
+      function messageListener(a, b) {
+        console.log("message recieved", a, b);
       }
 
       function receiverListener(e) {
