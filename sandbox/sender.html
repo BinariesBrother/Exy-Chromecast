@@ -1,15 +1,19 @@
 <html>
 
   <head>
-    <script src="chrome-extension://pkedcjkdefgpdelpbcmbmeomcjbeemfm/cast_sender.js"></script>
   </head>
 
   <body>
     <div class="content"></div>
+    <button is="google-cast-button"></button>
     <input id="videoId" value="M7lc1UVf-VE">
-    <button onclick="sendMessage()">send</button>
+    <button onclick="sendVideo()">send</button>
+    <button onclick="refreshList()">refresh video list</button>
+    <div id="videosTools"></div>
 
-    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+    <!--<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>-->
+    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+
     <script>
       var session;
       var sessionRequest;
@@ -28,29 +32,33 @@
       }
 
       window['__onGCastApiAvailable'] = function(loaded, errorInfo) {
-          if (loaded) {
-            initializeCastApi();
-          } else {
-            console.log(errorInfo);
-          }
+        if (loaded) {
+          initializeCastApi();
+        } else {
+          console.log(errorInfo);
         }
-        //M7lc1UVf-VE
-      function sendMessage() {
+      }
+
+      function sendVideo() {
         if (!document.getElementById("videoId").value) {
           console.log("nothing to send!");
           return false;
         }
         session.sendMessage(
           'urn:x-cast:com.exy.player', {
-            exec: "YoutubeContainer.instance.add('" + document.getElementById("videoId").value + "')"
+            exec: "YoutubeContainer.instance.add(" + document.getElementById("videoId").value + ")"
           },
           function(m) {
-            console.log('Message sent: ', 5);
+            console.log('Message sent: ', document.getElementById("videoId").value);
           },
           function(e) {
             console.log("err", e)
           }
         );
+      }
+
+      function refreshVideoList() {
+
       }
 
       function initializeCastApi() {
